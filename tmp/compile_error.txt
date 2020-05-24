@@ -1,0 +1,6 @@
+.\tmp\Solution.java:3: 错误: 找不到符号
+           System.out.prinln("hello");
+                     ^
+  符号:   方法 prinln(String)
+  位置: 类型为PrintStream的变量 out
+1 个错误
