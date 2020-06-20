@@ -35,6 +35,14 @@ public class ProblemServlet extends HttpServlet{
 
 
     private void selectAll(HttpServletResponse resp) throws IOException {
+        // Content-Type：描述了body中的数据类型是什么样的
+        // 常见取值：
+        // html:text/html
+        // 图片：image/png   image/ipg
+        //json:application/json
+        // css:text/css
+
+        resp.setContentType("application/json;charset=utf-8");
         ProblemDAO problemDAO=new ProblemDAO();
         List<Problem> problems=problemDAO.selectAll();
         // 把结果保存成gson结构
@@ -43,6 +51,13 @@ public class ProblemServlet extends HttpServlet{
         resp.getWriter().write(jsonString);
     }
 
-    private void selectOne(int i, HttpServletResponse resp) {
+    private void selectOne(int problemId, HttpServletResponse resp) throws IOException {
+        resp.setContentType("application/json;charset=utf-8");
+        ProblemDAO problemDAO=new ProblemDAO();
+        Problem problem=problemDAO.selectOne(problemId);
+        //测试代码不应该告诉前端用户 ,此时手动把这个内容清理掉
+        problem.setTestCode("");
+        String jsonString=gson.toJson(problem);
+        resp.getWriter().write(jsonString);
     }
 }
